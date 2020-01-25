@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <NonActiveUsers />
+    <HomePage />
   </div>
 </template>
 
 <script>
-import NonActiveUsers from "./components/NonActiveUsers.vue";
+import HomePage from "./components/HomePage.vue";
 
 export default {
   name: "app",
   components: {
-    NonActiveUsers
+    HomePage
   }
 };
 </script>
