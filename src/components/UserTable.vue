@@ -13,6 +13,7 @@
                 <UserRecord
                   :user="user"
                   :className="shouldHighlight(user, highlightUsers)"
+                  @selectUser="selectUser"
                 />
               </li>
             </ul>
@@ -24,6 +25,14 @@
             />
           </div>
         </div>
+        <div class="column is-4">
+          <UserDetail
+            :user="selectedUser"
+            @save="saveUser"
+            @cancel="cancelUser"
+            v-if="selectedUser"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +40,7 @@
 
 <script>
 import { data } from "../shared";
+import UserDetail from "./UserDetail";
 import UserRecord from "./UserRecord";
 import SelectUserFooter from "./SelectUserFooter";
 export default {
@@ -52,18 +62,20 @@ export default {
   data() {
     return {
       users: [],
+      selectedUser: undefined,
       highlightUsers: false
     };
   },
   components: {
+    UserDetail,
     UserRecord,
     SelectUserFooter
   },
   async created() {
-    await this.loadHeroes();
+    await this.loadUsers();
   },
   methods: {
-    async loadHeroes() {
+    async loadUsers() {
       this.users = [];
       this.message = "getting the user, please be patient";
 
@@ -76,6 +88,18 @@ export default {
     },
     unselectUsers() {
       this.highlightUsers = false;
+    },
+    cancelUser() {
+      this.selectedUser = undefined;
+    },
+    saveUser(user) {
+      const index = this.users.findIndex(u => u.id === user.id);
+      this.users.splice(index, 1, user);
+      this.users = [...this.users];
+      this.selectedUser = undefined;
+    },
+    selectUser(user) {
+      this.selectedUser = user;
     }
   }
 };

@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import UserTable from "./UserTable";
+import UserTable from "../components/UserTable";
 export default {
-  name: "NonActiveUsers",
+  name: "ActiveUsers",
   data() {
     return {
-      title: "Find non active users",
-      textSelect: "Select Non Active Users"
+      title: "Find active users",
+      textSelect: "Select Active Users"
     };
   },
   components: {
@@ -22,7 +22,7 @@ export default {
   methods: {
     shouldHighlight(user, highlightUsers) {
       if (!highlightUsers) return "";
-      return user.login_count === 0 ? "is-invalid" : "";
+      return user.login_count > 0 ? "is-valid" : "";
     }
   }
 };

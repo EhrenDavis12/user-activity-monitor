@@ -1,5 +1,5 @@
 <template>
-  <a class="list-item" :class="className">
+  <a class="list-item" :class="className" @click="selectUser">
     <span>{{ user.username }}</span>
   </a>
 </template>
@@ -15,6 +15,11 @@ export default {
     className: {
       type: String,
       default: ""
+    }
+  },
+  methods: {
+    selectUser() {
+      this.$emit("selectUser", this.user);
     }
   }
 };
