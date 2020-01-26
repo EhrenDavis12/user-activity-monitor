@@ -1,5 +1,12 @@
 # User Activity Monitor (Frontend)
 
+## Start the project
+
+- pull from gitHub
+- npm install
+- npm run serve
+- enjoy
+
 ## Resources
 
 - [Vue Javascript Framework](https://vuejs.org/)

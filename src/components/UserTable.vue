@@ -95,7 +95,6 @@ export default {
     saveUser(user) {
       const index = this.users.findIndex(u => u.id === user.id);
       this.users.splice(index, 1, user);
-      this.users = [...this.users];
       this.selectedUser = undefined;
     },
     selectUser(user) {
