@@ -8,7 +8,13 @@ import { API } from "./config";
 const getUsers = async function() {
   try {
     // const response = await axios.get(`${API}/users.json`);
-    const response = await fetch(`${API}/app-users-all`);
+    const response = await fetch(`${API}/app-users-all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    });
     let data = await parseListFetch(response);
     const users = data.map(user => {
       user.last_login = new Date(user.last_login);
