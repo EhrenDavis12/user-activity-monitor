@@ -9,14 +9,8 @@ import { API } from "./config";
 
 const getUsers = async function() {
   try {
-    // eslint-disable-next-line no-debugger
-    debugger;
     // const response = await axios.get(`${API}/users.json`);
-    const response = await axios.get(`${API}/app-users-all`, {
-      crossdomain: true
-    });
-    // eslint-disable-next-line no-debugger
-    debugger;
+    const response = await axios.get(`${API}/app-users-all`);
     // const response = await fetch(`${API}/app-users-all`);
     const data = parseListAxios(response);
     // const data = await parseListFetch(response);
