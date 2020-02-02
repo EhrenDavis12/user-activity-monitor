@@ -4,6 +4,9 @@
 
 - pull from gitHub
 - npm install
+- create a .env.local file in you project directory next to the Readme file.
+- VUE_APP_API="http://127.0.0.1:8000"
+  or VUE_APP_API="api" // if you want to load from a file but now patch users.
 - npm run serve
 - enjoy
 
