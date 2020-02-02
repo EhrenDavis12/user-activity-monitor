@@ -7,13 +7,10 @@ import { displayDateTimeFormat } from "./constants";
 
 import { API } from "./config";
 
-const getUsers = async function() {
+const getAllUsers = async function() {
   try {
-    // const response = await axios.get(`${API}/users.json`);
-    const response = await axios.get(`${API}/app-users-all`);
-    // const response = await fetch(`${API}/app-users-all`);
-    const data = parseListAxios(response);
-    // const data = await parseListFetch(response);
+    const url = API === "api" ? `${API}/users.json` : `${API}/app-users-all/`;
+    const data = await getAPICaller(url);
     const users = data.map(user => {
       user.last_login = new Date(user.last_login);
       user.last_login = format(user.last_login, displayDateTimeFormat);
@@ -28,15 +25,29 @@ const getUsers = async function() {
   }
 };
 
-// const parseListFetch = async function(response) {
-//   if (response.status !== 200) throw Error(response.message);
-//   if (!response.body) return [];
-//   let list = await response.text();
-//   if (list === "") {
-//     list = [];
-//   }
-//   return JSON.parse(list);
-// };
+const postUserName = async function(user) {
+  try {
+    if (API === "api") return;
+    const url = `${API}/app-users-all/${user.id}/`;
+    patchAPICaller(url, { username: user.username });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return;
+  }
+};
+
+const getAPICaller = async function(url) {
+  const response = await axios.get(url);
+  const data = parseListAxios(response);
+  return data;
+};
+
+const patchAPICaller = async function(url, data) {
+  const response = await axios.patch(url, data);
+  if (response.status !== 200) throw Error(response.message);
+  return;
+};
 
 const parseListAxios = response => {
   if (response.status !== 200) throw Error(response.message);
@@ -49,5 +60,6 @@ const parseListAxios = response => {
 };
 
 export const data = {
-  getUsers
+  getAllUsers,
+  postUserName
 };
