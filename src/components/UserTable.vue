@@ -79,7 +79,7 @@ export default {
       this.users = [];
       this.message = "getting the user, please be patient";
 
-      this.users = await data.getUsers();
+      this.users = await data.getAllUsers();
 
       this.message = "";
     },
@@ -95,6 +95,8 @@ export default {
     saveUser(user) {
       const index = this.users.findIndex(u => u.id === user.id);
       this.users.splice(index, 1, user);
+      //TODO place some error handling to show data properly
+      data.postUserName(user);
       this.selectedUser = undefined;
     },
     selectUser(user) {
