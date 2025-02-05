@@ -64,3 +64,10 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'AboutView',
+  // ... rest of component code
+}
+</script>
